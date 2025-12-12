@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClickEdu Overlay – Instal·lació Bookmarklet (Secure)</title>
+  
+  <!-- Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self'; 
+                 script-src 'self' 'unsafe-inline' https://joanfelipgithub.github.io; 
+                 connect-src https://docs.google.com https://sheets.googleapis.com;
+                 style-src 'self' 'unsafe-inline';
+                 img-src 'self' data:;
+                 font-src 'self';">
+  
+  <style>
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333; 
+      padding: 40px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 { 
+      color: #fff; 
+      display: flex; 
+      align-items: center; 
+      gap: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    h1 span { font-size: 2rem; }
+    
+    .security-badge {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-left: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .section { 
+      background: #fff; 
+      padding: 25px; 
+      border-radius: 12px; 
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+      margin-bottom: 30px;
+      border-left: 5px solid #007bff;
+    }
+    
+    .section.security {
+      border-left-color: #28a745;
+      background: #f8fff9;
+    }
+    
+    a.bookmarklet { 
+      display: inline-block; 
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+      color: #fff; 
+      padding: 15px 30px; 
+      text-decoration: none; 
+      border-radius: 10px; 
+      font-weight: bold; 
+      font-size: 18px; 
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: grab;
+    }
+    a.bookmarklet:hover { 
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+    }
+    a.bookmarklet:active {
+      cursor: grabbing;
+    }
+    
+    pre { 
+      background: #2d2d2d; 
+      color: #f8f8f2;
+      padding: 20px; 
+      border-radius: 8px; 
+      overflow-x: auto; 
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    ul { margin: 0; padding-left: 20px; }
+    li { margin-bottom: 12px; line-height: 1.6; }
+    
+    .icon { font-size: 1.5rem; margin-right: 8px; }
+    
+    code { 
+      background: #e9ecef; 
+      padding: 3px 8px; 
+      border-radius: 4px; 
+      font-family: 'Courier New', monospace;
+      color: #e83e8c;
+      font-size: 90%;
+    }
+    
+    .warning {
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    
+    .warning-icon {
+      color: #ffc107;
+      font-size: 24px;
+      margin-right: 10px;
+    }
+    
+    .security-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #28a745;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card h4 {
+      margin: 0 0 8px 0;
+      color: #28a745;
+      font-size: 16px;
+    }
+    
+    .feature-card p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .version-info {
+      background: #e7f3ff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin: 15px 0;
+      border-left: 4px solid #007bff;
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: #007bff;
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span>📂</span>
+      Docs_InsSCF
+      <span class="security-badge">🔒 SECURE</span>
+    </h1>
+    
+    <div class="section security">
+      <h2>🛡️ Protecció de Seguretat Activada</h2>
+      <p>Aquesta versió del bookmarklet inclou proteccions avançades de seguretat:</p>
+      
+      <div class="security-features">
+        <div class="feature-card">
+          <h4>✅ Verificació d'Integritat (SRI)</h4>
+          <p>El codi no pot ser modificat sense la teva aprovació</p>
+        </div>
+        <div class="feature-card">
+          <h4>✅ Llista Blanca de Dominis</h4>
+          <p>Només enllaços de dominis de confiança</p>
+        </div>
+        <div class="feature-card">
+          <h4>✅ Protecció contra Executables</h4>
+          <p>Bloqueja fitxers .exe, .bat i altres perillosos</p>
+        </div>
+        <div class="feature-card">
+          <h4>✅ Indicadors Visuals</h4>
+          <p>Els enllaços externs es mostren clarament</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2><span class="step-number">1</span>Instal·lar el Bookmarklet</h2>
+      
+      <div class="warning">
+        <span class="warning-icon">⚠️</span>
+        <strong>IMPORTANT:</strong> Arrossega el botó verd directament a la teva barra de marcadors. 
+        No facis clic, només arrossega!
+      </div>
+      
+      <p style="text-align: center; margin: 30px 0;">
+        <a class="bookmarklet" 
+           href="javascript:(function(){var s=document.createElement('script');s.src='https://joanfelipgithub.github.io/clickedu_docs_overlay/bookmarklet.js?v=1.0.0';s.integrity='sha384-REPLACE_WITH_YOUR_HASH';s.crossOrigin='anonymous';s.onerror=function(){alert('❌ ERROR DE SEGURETAT: El codi ha estat modificat o no es pot verificar. No utilitzis aquest bookmarklet i contacta amb l\'administrador.');};document.body.appendChild(s);})();"
+           draggable="true">
+          📌 DocsINSSCF
+        </a>
+      </p>
+      
+      <div class="version-info">
+        <strong>ℹ️ Versió:</strong> 1.0.0 | 
+        <strong>🔐 Hash SRI:</strong> sha384-REPLACE_WITH_YOUR_HASH
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2><span class="step-number">2</span>Opció Manual (si no funciona arrossegar)</h2>
+      
+      <p><strong>Pas 1:</strong> Crea un nou marcador al teu navegador</p>
+      <p><strong>Pas 2:</strong> Dona-li el nom: <code>DocsINSSCF</code></p>
+      <p><strong>Pas 3:</strong> Al camp URL/Adreça, enganxa aquest codi:</p>
+      
+      <pre>javascript:(function(){
+  var s=document.createElement('script');
+  s.src='https://joanfelipgithub.github.io/clickedu_docs_overlay/bookmarklet.js?v=1.0.0';
+  s.integrity='sha384-REPLACE_WITH_YOUR_HASH';
+  s.crossOrigin='anonymous';
+  s.onerror=function(){
+    alert('❌ ERROR DE SEGURETAT: El codi ha estat modificat. No l\'utilitzis!');
+  };
+  document.body.appendChild(s);
+})();</pre>
+
+      <div class="warning">
+        <span class="warning-icon">🔒</span>
+        <strong>Nota de Seguretat:</strong> El codi <code>s.integrity</code> verifica que el fitxer no ha estat modificat. 
+        Si veus l'error de seguretat, NO utilitzis el bookmarklet i contacta amb l'administrador.
+      </div>
+    </div>
+    
+    <div class="section">
+      <h2><span class="step-number">3</span>Com Utilitzar-lo</h2>
+      <ul>
+        <li><span class="icon">🌐</span> Ves a la secció <strong>Passarel·les</strong> dins de <strong>Sumari</strong> al ClickEdu</li>
+        <li><span class="icon">📂</span> Fes clic al marcador <strong>"DocsINSSCF"</strong> que has creat</li>
+        <li><span class="icon">⚡</span> Apareixerà l'overlay amb els documents</li>
+        <li><span class="icon">🌐</span> Els enllaços externs es mostren en <strong style="color: #ff9800;">color taronja</strong></li>
+        <li><span class="icon">❌</span> Prem <strong>Escape</strong> o clica fora per tancar</li>
+      </ul>
+    </div>
+    
+    <div class="section security">
+      <h2><span class="step-number">👨‍💼</span>Informació per Administradors</h2>
+      
+      <h3>🔑 Accés d'Edició</h3>
+      <ul>
+        <li>Amb l'overlay obert, prem <code>Ctrl+Shift+S</code> per obrir el Google Sheet</li>
+        <li>Només els usuaris amb permisos d'edició al Sheet podran modificar-lo</li>
+        <li>Els canvis trigaràn 1-5 minuts a aparèixer (memòria cau de Google)</li>
+      </ul>
+      
+      <h3>🔄 Actualitzar el Bookmarklet</h3>
+      <ol>
+        <li>Modifica <code>bookmarklet.js</code> al GitHub</li>
+        <li>Executa <code>node generate-sri-hash.js</code> per obtenir el nou hash</li>
+        <li>Actualitza l'<code>index.html</code> amb el nou hash i versió</li>
+        <li>Els usuaris hauran de <strong>tornar a arrossegar</strong> el bookmarklet</li>
+      </ol>
+      
+      <h3>⚠️ Si es Detecta un Atac</h3>
+      <ul>
+        <li>Canvia immediatament els permisos del Google Sheet a privat</li>
+        <li>Revisa l'historial de versions del Sheet per detectar canvis sospitosos</li>
+        <li>Canvia el hash SRI per invalidar versions antigues</li>
+        <li>Notifica tots els usuaris per email</li>
+      </ul>
+    </div>
+    
+    <div class="section">
+      <h2>📞 Suport</h2>
+      <p>Si tens problemes o detectes comportaments estranys:</p>
+      <ul>
+        <li>Comprova que el bookmarklet es carrega correctament</li>
+        <li>Obre la consola del navegador (F12) i busca errors</li>
+        <li>Contacta amb l'administrador del sistema</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    // Prevent accidental navigation away
+    document.querySelectorAll('a.bookmarklet').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('⚠️ No facis clic! Arrossega aquest botó a la barra de marcadors del teu navegador.');
+      });
+    });
+  </script>
+</body>
+</html>
